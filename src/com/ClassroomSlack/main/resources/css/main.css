@@ -39,7 +39,7 @@
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
     -fx-background-color: white;
-    -fx-background-radius: 5em;
+    -fx-background-radius: 2em;
 }
 .check-box .box {
 -fx-background-color: white;
