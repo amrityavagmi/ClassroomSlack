@@ -5,6 +5,7 @@ import com.ClassroomSlack.database.logIn.userLoggedIn;
 import com.ClassroomSlack.main.template.loginHome;
 //import com.ClassroomSlack.main.template.profile;
 
+import com.ClassroomSlack.main.template.profile;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -27,8 +28,8 @@ public class main extends Application {
 
         if (!status[0].equals("success"))
             window.setScene(loginHome.homeView());
-//        else
-//            window.setScene(profile.main(status[1], status[2], status[3]));
+        else
+            window.setScene(profile.main(status[1], status[2], status[3], status[4]));
 
         window.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/ClassroomSlack.png")));
 

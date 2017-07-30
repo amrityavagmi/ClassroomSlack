@@ -18,9 +18,9 @@ public class dbLoginCheck {
 
         String query = DBUtils.prepareSelectQuery(" * ", "classroomslack.company", "( companyName = ? AND employeeEmailId = ? AND password = ? )");
 
-        String updateCurrentUserQuery = DBUtils.prepareInsertQuery("classroomslack.currentuser", "id, companyName, fullName, employeeEmailId", "?,?,?,?");
+        String updateCurrentUserQuery = DBUtils.prepareInsertQuery("classroomslack.currentuser", "id, companyName, userName, employeeEmailId, slackId", "?,?,?,?,?");
 
-        String[] status = {"ongoing",""};
+        String[] status = {"ongoing","",""};
 
         try {
             con = DBUtils.getConnection();
@@ -35,16 +35,19 @@ public class dbLoginCheck {
             rs.beforeFirst();
 
             if (size>0){
-                status[0]="success";
                 rs.next();
-                status[1]=rs.getString("fullName");
+                status[1]=rs.getString("userName");
+                status[2]=rs.getString("slackId");
 
                 stmt = con.prepareStatement(updateCurrentUserQuery);
                 stmt.setString(1, userID);
                 stmt.setString(2, companyName);
                 stmt.setString(3, status[1]);
                 stmt.setString(4, emailId);
+                stmt.setString(5, status[2]);
                 stmt.executeUpdate();
+
+                status[0]="success";
             }
 
         } catch (Exception e) {

@@ -1,6 +1,7 @@
 package com.ClassroomSlack.main.template;
 
 import com.ClassroomSlack.database.signIn.dbSignUp;
+import com.ClassroomSlack.main.functions.getMotherboardSN;
 import com.ClassroomSlack.main.windows.home.main;
 
 import javafx.beans.property.BooleanProperty;
@@ -18,6 +19,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,11 +51,11 @@ public class userSignUp {
             }
         });
 
-        TextField fullName = new TextField();
-        fullName.setFont(Font.font(15));
-        fullName.setPromptText("Full Name");
-        fullName.setPrefHeight(30);
-        fullName.setStyle("-fx-background-color: transparent; -fx-border-color: #fff; -fx-border-width: 2,2,2,2; -fx-border-radius: 200; -fx-text-inner-color: #fff;");
+        TextField userName = new TextField();
+        userName.setFont(Font.font(15));
+        userName.setPromptText("User Name");
+        userName.setPrefHeight(30);
+        userName.setStyle("-fx-background-color: transparent; -fx-border-color: #fff; -fx-border-width: 2,2,2,2; -fx-border-radius: 200; -fx-text-inner-color: #fff;");
 
         TextField email = new TextField();
         email.setFont(Font.font(15));
@@ -86,8 +89,8 @@ public class userSignUp {
         signUpButton.setOnAction(e-> {
             if (companyName.getText().isEmpty())
                 error.setText("Company Name can't be empty");
-            else if (fullName.getText().isEmpty())
-                error.setText("Full Name can't be empty");
+            else if (userName.getText().isEmpty())
+                error.setText("User Name can't be empty");
             else if (email.getText().isEmpty())
                 error.setText("Email Id can't be empty");
             else if (!validate(email.getText()))
@@ -99,9 +102,14 @@ public class userSignUp {
             else if (!password.getText().equals(confirmPassword.getText()))
                 error.setText("Password and confirm password don't match");
             else{
-                status = dbSignUp.userSignUp(companyName.getText(), fullName.getText(),email.getText(),password.getText());
+
+                String userID = getMotherboardSN.getMotherboardSN();
+                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                String newSlackId = companyName.getText() + userID + timeStamp;
+
+                status = dbSignUp.userSignUp(companyName.getText(), userName.getText(),email.getText(),password.getText(),newSlackId);
                 if (status=="success") {
-//                    main.window.setScene(profile.main(companyName.getText(), fullName.getText(), email.getText()));
+                    main.window.setScene(profile.main(companyName.getText(), userName.getText(), email.getText(), newSlackId));
                 }
                 else
                     error.setText(status);
@@ -124,7 +132,7 @@ public class userSignUp {
             new Thread(sleeper).start();
         });
 
-        vb.getChildren().addAll(companyName, fullName, email, password, confirmPassword, error, signUpRow);
+        vb.getChildren().addAll(companyName, userName, email, password, confirmPassword, error, signUpRow);
         signUpPane.setCenter(vb);
         signUpPane.setMinHeight(400);
 
