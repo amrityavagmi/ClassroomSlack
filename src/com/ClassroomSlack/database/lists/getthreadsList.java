@@ -25,7 +25,7 @@ public class getthreadsList {
 
             rs.last();
             int size = rs.getRow();
-            response = new String[size+1][2];
+            response = new String[size+1][3];
             rs.beforeFirst();
 
             if (size>0){
@@ -34,7 +34,8 @@ public class getthreadsList {
                 int count = 1;
                 while (rs.next()){
                     response[count][0] = rs.getString("threadName");
-                    response[count++][1] = rs.getString("threadType");
+                    response[count][1] = rs.getString("emailId");
+                    response[count++][2] = rs.getString("threadType");
                 }
             }
             else

@@ -18,7 +18,7 @@ public class dbSignUp {
 
         String updateCurrentUserQuery = DBUtils.prepareInsertQuery("classroomslack.currentuser", "id, companyName, userName, employeeEmailId, slackId", "?,?,?,?,?");
 
-        String insertUserQuery = DBUtils.prepareInsertQuery("classroomslack.threads", "companyName ,threadName, threadType", "?,?,?");
+        String insertUserQuery = DBUtils.prepareInsertQuery("classroomslack.threads", "companyName ,threadName, emailId, threadType", "?,?,?,?");
 
         String userID = getMotherboardSN.getMotherboardSN();
         String status = "ongoing";
@@ -36,7 +36,8 @@ public class dbSignUp {
             stmt = con.prepareStatement(insertUserQuery);
             stmt.setString(1, companyName);
             stmt.setString(2, userName);
-            stmt.setString(3, "direct message");
+            stmt.setString(3, employeeEmailId);
+            stmt.setString(4, "direct message");
             stmt.executeUpdate();
 
             status="success";

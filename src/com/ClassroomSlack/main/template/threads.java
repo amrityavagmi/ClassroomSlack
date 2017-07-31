@@ -33,10 +33,10 @@ public class threads {
         String[][] threadsLinked = getthreadsList.getthreadsList(companyName);
         if (threadsLinked[0][0].equals("success")){
             for (int i=1;i<threadsLinked.length;++i)
-                if (threadsLinked[i][0].equals(userName) && threadsLinked[i][1].equals("direct message"))
-                    addThreads(companyName, threadsLinked[i][0]+" (you)", threadsLinked[i][1], currentUserMailId);
+                if (threadsLinked[i][0].equals(userName) && threadsLinked[i][2].equals("direct message"))
+                    addThreads(companyName, threadsLinked[i][0]+" (you)", threadsLinked[i][1], threadsLinked[i][2], currentUserMailId);
                 else
-                    addThreads(companyName, threadsLinked[i][0], threadsLinked[i][1], currentUserMailId);
+                    addThreads(companyName, threadsLinked[i][0], threadsLinked[i][1], threadsLinked[i][2], currentUserMailId);
         }
 
         ScrollPane channelScroller = new ScrollPane(new BorderPane(channelVB, addThreadTitle(companyName,"channel", currentUserMailId),null,null,null));
@@ -63,7 +63,7 @@ public class threads {
 
     }
 
-    public static void addThreads(String companyName, String threadName, String threadType, String currentUserMailId){
+    public static void addThreads(String companyName, String threadName, String threadMailId, String threadType, String currentUserMailId){
         Label newThread = new Label("  "+threadName);
         newThread.setAlignment(Pos.BASELINE_LEFT);
         newThread.setPadding(new Insets(5,10,5,10));
@@ -87,7 +87,7 @@ public class threads {
         else{
             directMessageVB.getChildren().add(newThreadPane);
             newThreadPane.setOnMouseClicked(e-> {
-//                    view.setCenter(channelMessages.channelMessages(companyName, threadName, currentUserMailId))
+                    view.setCenter(directMessages.directMessages(companyName, threadName, threadMailId, currentUserMailId));
             });
         }
     }
@@ -107,7 +107,7 @@ public class threads {
             title.setOnMouseClicked(e-> {
                 String status = ob.newThread(companyName, threadType);
                 if (!status.equals(""))
-                    addThreads(companyName,status,threadType, currentUserMailId);
+                    addThreads(companyName, status,"", threadType, currentUserMailId);
             });
         }
         else{
