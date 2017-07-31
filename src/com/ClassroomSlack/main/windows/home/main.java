@@ -34,7 +34,7 @@ public class main extends Application {
         window.getIcons().add(new Image(getClass().getResourceAsStream("../../resources/images/ClassroomSlack.png")));
 
         window.setMinWidth(850);
-//        window.setMinHeight(550);
+        window.setMinHeight(550);
         window.show();
         window.setOnCloseRequest(e->System.exit(0));
 

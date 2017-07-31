@@ -1,5 +1,6 @@
 package com.ClassroomSlack.main.template;
 
+import com.ClassroomSlack.database.logIn.userLoggedIn;
 import com.ClassroomSlack.database.signIn.dbSignUp;
 import com.ClassroomSlack.main.functions.getMotherboardSN;
 import com.ClassroomSlack.main.windows.home.main;
@@ -106,6 +107,10 @@ public class userSignUp {
                 String userID = getMotherboardSN.getMotherboardSN();
                 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
                 String newSlackId = companyName.getText() + userID + timeStamp;
+
+                String[] loggedUserStatus = userLoggedIn.userLoggedIn(userID);
+                if (loggedUserStatus[0].equals("success"))
+                    newSlackId = loggedUserStatus[4];
 
                 status = dbSignUp.userSignUp(companyName.getText(), userName.getText(),email.getText(),password.getText(),newSlackId);
                 if (status=="success") {

@@ -52,6 +52,7 @@ public class profile {
         addCompany.setPadding(new Insets(10,0,10,0));
         addCompany.setTextFill(Color.web("#a1a1a1"));
         addCompany.setCursor(Cursor.HAND);
+        addCompany.setOnMouseClicked(e-> main.window.setScene(loginHome.homeView()));
 
         VBox companyList = new VBox(0,companyScroller, addCompany);
         companyList.setPadding(new Insets(10,0,0,10));

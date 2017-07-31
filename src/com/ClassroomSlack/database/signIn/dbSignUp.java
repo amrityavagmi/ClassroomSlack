@@ -1,5 +1,6 @@
 package com.ClassroomSlack.database.signIn;
 
+import com.ClassroomSlack.database.logIn.userLoggedIn;
 import com.ClassroomSlack.database.utils.DBUtils;
 import com.ClassroomSlack.main.functions.getMotherboardSN;
 
@@ -32,14 +33,6 @@ public class dbSignUp {
             stmt.setString(5, slackId);
             stmt.executeUpdate();
 
-            stmt = con.prepareStatement(updateCurrentUserQuery);
-            stmt.setString(1, userID);
-            stmt.setString(2, companyName);
-            stmt.setString(3, userName);
-            stmt.setString(4, employeeEmailId);
-            stmt.setString(5, slackId);
-            stmt.executeUpdate();
-
             stmt = con.prepareStatement(insertUserQuery);
             stmt.setString(1, companyName);
             stmt.setString(2, userName);
@@ -47,6 +40,18 @@ public class dbSignUp {
             stmt.executeUpdate();
 
             status="success";
+
+            String[] loggedUserStatus = userLoggedIn.userLoggedIn(userID);
+            if (!loggedUserStatus[0].equals("success")){
+                stmt = con.prepareStatement(updateCurrentUserQuery);
+                stmt.setString(1, userID);
+                stmt.setString(2, companyName);
+                stmt.setString(3, userName);
+                stmt.setString(4, employeeEmailId);
+                stmt.setString(5, slackId);
+                stmt.executeUpdate();
+            }
+
         }
         catch(Exception e){
             status = e.getMessage();

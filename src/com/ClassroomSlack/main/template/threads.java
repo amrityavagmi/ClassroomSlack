@@ -23,7 +23,7 @@ public class threads {
     public static VBox directMessageVB;
     public static BorderPane view;
 
-    public static BorderPane chatDetails(String companyName, String userName, String employeeEmailId ){
+    public static BorderPane chatDetails(String companyName, String userName, String currentUserMailId ){
 
         view = new BorderPane();
 
@@ -34,19 +34,19 @@ public class threads {
         if (threadsLinked[0][0].equals("success")){
             for (int i=1;i<threadsLinked.length;++i)
                 if (threadsLinked[i][0].equals(userName) && threadsLinked[i][1].equals("direct message"))
-                    addThreads(companyName, threadsLinked[i][0]+" (you)", threadsLinked[i][1]);
+                    addThreads(companyName, threadsLinked[i][0]+" (you)", threadsLinked[i][1], currentUserMailId);
                 else
-                    addThreads(companyName, threadsLinked[i][0], threadsLinked[i][1]);
+                    addThreads(companyName, threadsLinked[i][0], threadsLinked[i][1], currentUserMailId);
         }
 
-        ScrollPane channelScroller = new ScrollPane(new BorderPane(channelVB, addThreadTitle(companyName,"channel"),null,null,null));
+        ScrollPane channelScroller = new ScrollPane(new BorderPane(channelVB, addThreadTitle(companyName,"channel", currentUserMailId),null,null,null));
         channelScroller.setStyle("-fx-background-color: transparent");
         channelScroller.setPadding(new Insets(0,0,15,0));
         channelScroller.setFitToWidth(true);
         channelScroller.setVvalue(1.0);
         channelScroller.vvalueProperty().bind(channelVB.heightProperty());
 
-        ScrollPane directMessageScroller = new ScrollPane( new BorderPane(directMessageVB, addThreadTitle(companyName,"direct message"),null,null,null));
+        ScrollPane directMessageScroller = new ScrollPane( new BorderPane(directMessageVB, addThreadTitle(companyName,"direct message", currentUserMailId),null,null,null));
         directMessageScroller.setStyle("-fx-background-color: transparent");
         directMessageScroller.setFitToWidth(true);
         directMessageScroller.setVvalue(1.0);
@@ -63,7 +63,7 @@ public class threads {
 
     }
 
-    public static void addThreads(String companyName, String threadName,String threadType){
+    public static void addThreads(String companyName, String threadName, String threadType, String currentUserMailId){
         Label newThread = new Label("  "+threadName);
         newThread.setAlignment(Pos.BASELINE_LEFT);
         newThread.setPadding(new Insets(5,10,5,10));
@@ -77,17 +77,22 @@ public class threads {
         newThreadPane.setCursor(Cursor.HAND);
 
         newThread.setMaxWidth(200);
-        newThread.setOnMouseClicked(e->
-                view.setCenter(channelMessages.threadMessages(companyName, threadName))
-        );
 
-        if (threadType.equals("channel"))
+        if (threadType.equals("channel")){
             channelVB.getChildren().add(newThreadPane);
-        else
+            newThreadPane.setOnMouseClicked(e->
+                    view.setCenter(channelMessages.channelMessages(companyName, threadName, currentUserMailId))
+            );
+        }
+        else{
             directMessageVB.getChildren().add(newThreadPane);
+            newThreadPane.setOnMouseClicked(e-> {
+//                    view.setCenter(channelMessages.channelMessages(companyName, threadName, currentUserMailId))
+            });
+        }
     }
 
-    public static Label addThreadTitle(String companyName, String threadType){
+    public static Label addThreadTitle(String companyName, String threadType, String currentUserMailId){
         Label title;
 
         if (threadType.equals("channel")){
@@ -102,7 +107,7 @@ public class threads {
             title.setOnMouseClicked(e-> {
                 String status = ob.newThread(companyName, threadType);
                 if (!status.equals(""))
-                    addThreads(companyName,status,threadType);
+                    addThreads(companyName,status,threadType, currentUserMailId);
             });
         }
         else{
