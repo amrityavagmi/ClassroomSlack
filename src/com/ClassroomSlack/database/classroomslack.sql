@@ -38,7 +38,7 @@ CREATE TABLE `channelcomment` (
 
 LOCK TABLES `channelcomment` WRITE;
 /*!40000 ALTER TABLE `channelcomment` DISABLE KEYS */;
-INSERT INTO `channelcomment` VALUES ('2017.07.31.17.31.59','microsoft','general','submiitr07@gmail.com','Hi @here, welcome to general channel'),('2017.07.31.17.41.59','microsoft','general','navin@gmail.com','Hello there'),('2017.07.31.18.01.59','microsoft','general','submiitr07@gmail.com','Good to see you back here'),('2017.07.31.18.10.59','microsoft','general','submiitr07@gmail.com','Lets take things forward from here'),('2017.07.31.20.23.59','microsoft','general','navin@gmail.com','Sure.'),('2017.07.31.20.28.02','microsoft','general','navin@gmail.com','How about your placements. All prepared.\n:) :)'),('2017.07.31.20.30.38','microsoft','java- Graphics driver','navin@gmail.com','Users are complaining that drivers Intellij drivers are not getting installed properly'),('2017.07.31.20.30.54','microsoft','java- Graphics driver','navin@gmail.com','@shubham May you complete this taks by EOD'),('2017.07.31.21.43.36','microsoft','speakout','harpreet@gmail.com','First message at speakout');
+INSERT INTO `channelcomment` VALUES ('2017.07.31.17.31.59','microsoft','general','submiitr07@gmail.com','Hi @here, welcome to general channel'),('2017.07.31.17.41.59','microsoft','general','navin@gmail.com','Hello there'),('2017.07.31.18.01.59','microsoft','general','submiitr07@gmail.com','Good to see you back here'),('2017.07.31.18.10.59','microsoft','general','submiitr07@gmail.com','Lets take things forward from here'),('2017.07.31.20.23.59','microsoft','general','navin@gmail.com','Sure.'),('2017.07.31.20.28.02','microsoft','general','navin@gmail.com','How about your placements. All prepared.\n:) :)'),('2017.07.31.20.30.38','microsoft','java- Graphics driver','navin@gmail.com','Users are complaining that drivers Intellij drivers are not getting installed properly'),('2017.07.31.20.30.54','microsoft','java- Graphics driver','navin@gmail.com','@shubham May you complete this taks by EOD'),('2017.07.31.21.43.36','microsoft','speakout','harpreet@gmail.com','First message at speakout'),('2017.08.01.02.28.36','microsoft','java- Graphics driver','submiitr07@gmail.com','ok, I will look through it');
 /*!40000 ALTER TABLE `channelcomment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +65,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES ('Appeti','Joshi','joshi@gmail.com','iitr','Appeti.8Q8MF32.CN762064CH1JMT.2017.08.01.00.04.34'),('facebook','maddy','subm@facebook.cco','iitr','microsoft.8Q8MF32.CN762064CH1JMT.2017.07.30.15.41.12'),('Google','shubham','shubham@gmail.com','iitr','microsoft.8Q8MF32.CN762064CH1JMT.2017.07.30.15.41.12'),('microsoft','Harpreet Singh','harpreet@gmail.com','iitr','microsoft.8Q8MF32.CN762064CH1JMT.2017.07.31.20.41.37'),('microsoft','Navin Gupta','navin@gmail.com','iitr','microsoft.8Q8MF32.CN762064CH1JMT.2017.07.31.17.31.59'),('microsoft','Nitesh prajapati','nitesh@gmail.com','iitr','microsoft.8Q8MF32.CN762064CH1JMT.2017.07.31.18.31.07'),('microsoft','madHEYsia','submiitr07@gmail.com','iitr','Appeti.8Q8MF32.CN762064CH1JMT.2017.08.01.00.04.34');
+INSERT INTO `company` VALUES ('Appeti','Joshi','joshi@gmail.com','iitr','Appeti.8Q8MF32.CN762064CH1JMT.2017.08.01.00.04.34'),('facebook','maddy','subm@facebook.cco','iitr','Appeti.8Q8MF32.CN762064CH1JMT.2017.08.01.00.04.34'),('Google','shubham','shubham@gmail.com','iitr','Appeti.8Q8MF32.CN762064CH1JMT.2017.08.01.00.04.34'),('microsoft','Harpreet Singh','harpreet@gmail.com','iitr','microsoft.8Q8MF32.CN762064CH1JMT.2017.07.31.20.41.37'),('microsoft','Navin Gupta','navin@gmail.com','iitr','microsoft.8Q8MF32.CN762064CH1JMT.2017.07.31.17.31.59'),('microsoft','Nitesh prajapati','nitesh@gmail.com','iitr','microsoft.8Q8MF32.CN762064CH1JMT.2017.07.31.18.31.07'),('microsoft','madHEYsia','submiitr07@gmail.com','iitr','Appeti.8Q8MF32.CN762064CH1JMT.2017.08.01.00.04.34');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,6 @@ CREATE TABLE `currentuser` (
 
 LOCK TABLES `currentuser` WRITE;
 /*!40000 ALTER TABLE `currentuser` DISABLE KEYS */;
-INSERT INTO `currentuser` VALUES ('.8Q8MF32.CN762064CH1JMT.','microsoft','madHEYsia','submiitr07@gmail.com','Appeti.8Q8MF32.CN762064CH1JMT.2017.08.01.00.04.34');
 /*!40000 ALTER TABLE `currentuser` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,7 +118,7 @@ CREATE TABLE `directmessages` (
 
 LOCK TABLES `directmessages` WRITE;
 /*!40000 ALTER TABLE `directmessages` DISABLE KEYS */;
-INSERT INTO `directmessages` VALUES ('2017.07.31.17.31.59','microsoft','submiitr07@gmail.com','navin@gmail.com','Hi'),('2017.07.31.17.32.09','microsoft','navin@gmail.com','submiitr07@gmail.com','Hi there'),('2017.07.31.17.35.59','microsoft','submiitr07@gmail.com','navin@gmail.com','wassaup boy'),('2017.07.31.17.36.09','microsoft','navin@gmail.com','submiitr07@gmail.com','all cool. Testing for DBMS project'),('2017.08.01.01.36.57','microsoft','navin@gmail.com','submiitr07@gmail.com','Yes, I love testing my own app');
+INSERT INTO `directmessages` VALUES ('2017.07.31.17.31.59','microsoft','submiitr07@gmail.com','navin@gmail.com','Hi'),('2017.07.31.17.32.09','microsoft','navin@gmail.com','submiitr07@gmail.com','Hi there'),('2017.07.31.17.35.59','microsoft','submiitr07@gmail.com','navin@gmail.com','wassaup boy'),('2017.07.31.17.36.09','microsoft','navin@gmail.com','submiitr07@gmail.com','all cool. Testing for DBMS project'),('2017.08.01.01.36.57','microsoft','navin@gmail.com','submiitr07@gmail.com','Yes, I love testing my own app'),('2017.08.01.01.53.13','microsoft','submiitr07@gmail.com','navin@gmail.com','Yeah');
 /*!40000 ALTER TABLE `directmessages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,4 +157,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-01  1:50:27
+-- Dump completed on 2017-08-01  2:57:45
