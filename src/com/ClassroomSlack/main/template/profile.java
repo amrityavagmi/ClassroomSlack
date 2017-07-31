@@ -63,7 +63,7 @@ public class profile {
         companyDetails = threads.chatDetails(companyName,userName,emailId);
         profilePane.setCenter(companyDetails);
 
-        scene = new Scene(profilePane,800,500);
+        scene = new Scene(profilePane,850,550);
         scene.getStylesheets().add(main.class.getResource("../../resources/css/main.css").toExternalForm());
 
         String image = profile.class.getResource("../resources/images/splash.jpg").toExternalForm();

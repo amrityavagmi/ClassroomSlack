@@ -30,6 +30,25 @@ public class threads {
         channelVB = new VBox(0);
         directMessageVB = new VBox(0);
 
+        VBox companyHeader = new VBox(5);
+        companyHeader.setPadding(new Insets(0,0,10,0));
+        companyHeader.setAlignment(Pos.TOP_LEFT);
+
+        Label fullName = new Label(userName);
+        fullName.setPadding(new Insets(10,0,0,0));
+        fullName.setFont(new Font("Cambria", 25));
+        fullName.setTextFill(Color.web("#000"));
+
+        Label company = GlyphsDude.createIconLabel( FontAwesomeIcon.BANK,
+                companyName,
+                "20",
+                "20",
+                ContentDisplay.LEFT );
+        company.setFont(new Font("Cambria", 12));
+        company.setTextFill(Color.web("#000"));
+
+        companyHeader.getChildren().addAll(fullName, company);
+
         String[][] threadsLinked = getthreadsList.getthreadsList(companyName);
         if (threadsLinked[0][0].equals("success")){
             for (int i=1;i<threadsLinked.length;++i)
@@ -39,20 +58,44 @@ public class threads {
                     addThreads(companyName, threadsLinked[i][0], threadsLinked[i][1], threadsLinked[i][2], currentUserMailId);
         }
 
-        ScrollPane channelScroller = new ScrollPane(new BorderPane(channelVB, addThreadTitle(companyName,"channel", currentUserMailId),null,null,null));
+        ScrollPane channelScroller = new ScrollPane( channelVB );
         channelScroller.setStyle("-fx-background-color: transparent");
         channelScroller.setPadding(new Insets(0,0,15,0));
         channelScroller.setFitToWidth(true);
         channelScroller.setVvalue(1.0);
         channelScroller.vvalueProperty().bind(channelVB.heightProperty());
 
-        ScrollPane directMessageScroller = new ScrollPane( new BorderPane(directMessageVB, addThreadTitle(companyName,"direct message", currentUserMailId),null,null,null));
+        ScrollPane directMessageScroller = new ScrollPane( directMessageVB );
         directMessageScroller.setStyle("-fx-background-color: transparent");
         directMessageScroller.setFitToWidth(true);
         directMessageScroller.setVvalue(1.0);
         directMessageScroller.vvalueProperty().bind(directMessageVB.heightProperty());
 
-        BorderPane threads = new BorderPane(directMessageScroller, channelScroller,null,null,null);
+        BorderPane channelComplete = new BorderPane(
+                channelScroller,
+                addThreadTitle(companyName,"channel", currentUserMailId),
+                null,
+                null,
+                null);
+
+        BorderPane directMessageComplete = new BorderPane(
+                directMessageScroller,
+                addThreadTitle(companyName,"direct message", currentUserMailId),
+                null,
+                null,
+                null);
+
+        BorderPane threads = new BorderPane(
+                new BorderPane(
+                        directMessageComplete,
+                        channelComplete,
+                        null,
+                        null,
+                        null),
+                companyHeader ,
+                null,
+                null,
+                null);
         threads.setPrefWidth(200);
         threads.setPadding(new Insets(10,0,10,10));
         threads.setStyle("-fx-background-color: #858585");

@@ -1,12 +1,20 @@
 package com.ClassroomSlack.main.template;
 
+import com.ClassroomSlack.database.logIn.userLoggedIn;
+import com.ClassroomSlack.main.functions.getMotherboardSN;
+import com.ClassroomSlack.main.windows.home.main;
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -22,6 +30,17 @@ public class loginHome {
         Label title = new Label("Classroom Slack");
         title.setFont(new Font("Cambria", 60));
         title.setTextFill(Color.web("#ededed"));
+
+        Label goBack = GlyphsDude.createIconLabel( FontAwesomeIcon.LONG_ARROW_LEFT,
+                "",
+                "50",
+                "0",
+                ContentDisplay.LEFT );
+        goBack.setCursor(Cursor.HAND);
+        goBack.setStyle("-fx-text-fill : #fff");
+        StackPane goBackPane = new StackPane(goBack);
+        goBackPane.setPadding(new Insets(0,0,0,50));
+        goBackPane.setAlignment(Pos.TOP_LEFT);
 
         HBox header = new HBox(25);
         header.setMinHeight(30);
@@ -62,11 +81,19 @@ public class loginHome {
 
         VBox centerVB = new VBox(30);
         centerVB.setAlignment(Pos.CENTER);
-        centerVB.getChildren().addAll(title, credential);
+
+        String userID = getMotherboardSN.getMotherboardSN();
+        String[] status = userLoggedIn.userLoggedIn(userID);
+        goBackPane.setOnMouseClicked(e-> main.window.setScene(profile.main(status[1], status[2], status[3], status[4])));
+
+        if (status[0].equals("success"))
+            centerVB.getChildren().addAll(goBackPane, credential);
+        else
+            centerVB.getChildren().addAll(title, credential);
 
         view.setCenter(centerVB);
 
-        Scene scene = new Scene(view,800,500);
+        Scene scene = new Scene(view,850,550);
         scene.getStylesheets().add(loginHome.class.getResource("../resources/css/main.css").toExternalForm());
 
         image = loginHome.class.getResource("../resources/images/splash.jpg").toExternalForm();
