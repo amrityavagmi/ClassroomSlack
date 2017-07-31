@@ -39,13 +39,16 @@ public class dbLoginCheck {
                 status[1]=rs.getString("userName");
                 status[2]=rs.getString("slackId");
 
-                stmt = con.prepareStatement(updateCurrentUserQuery);
-                stmt.setString(1, userID);
-                stmt.setString(2, companyName);
-                stmt.setString(3, status[1]);
-                stmt.setString(4, emailId);
-                stmt.setString(5, status[2]);
-                stmt.executeUpdate();
+                String[] loggedUserStatus = userLoggedIn.userLoggedIn(userID);
+                if (!loggedUserStatus[0].equals("success")) {
+                    stmt = con.prepareStatement(updateCurrentUserQuery);
+                    stmt.setString(1, userID);
+                    stmt.setString(2, companyName);
+                    stmt.setString(3, status[1]);
+                    stmt.setString(4, emailId);
+                    stmt.setString(5, status[2]);
+                    stmt.executeUpdate();
+                }
 
                 status[0]="success";
             }

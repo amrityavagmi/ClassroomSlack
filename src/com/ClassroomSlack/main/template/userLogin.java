@@ -1,7 +1,10 @@
 package com.ClassroomSlack.main.template;
 
 import com.ClassroomSlack.database.logIn.dbLoginCheck;
+import com.ClassroomSlack.database.logIn.userLoggedIn;
+import com.ClassroomSlack.main.functions.getMotherboardSN;
 import com.ClassroomSlack.main.windows.home.main;
+import com.ClassroomSlack.database.logIn.updateSlackId;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -83,6 +86,11 @@ public class userLogin {
             else if (password.getText().isEmpty())
                 error.setText("Password can't be empty");
             else{
+                String userID = getMotherboardSN.getMotherboardSN();
+                String[] loggedUserStatus = userLoggedIn.userLoggedIn(userID);
+                if (loggedUserStatus[0].equals("success"))
+                    updateSlackId.update(companyName.getText(), emailId.getText(), loggedUserStatus[4]);
+
                 status = dbLoginCheck.dbLoginCheck(companyName.getText(),emailId.getText(),password.getText());
                 if (status[0].equals("success")){
                     main.window.setScene(profile.main(companyName.getText(), status[1], emailId.getText(), status[2]));

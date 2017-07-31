@@ -103,7 +103,7 @@ public class DBUtils {
     }
 
     public static int updateQuery(String query) throws SQLException{
-        if(query != null && query.isEmpty()){
+        if(query != null && !query.isEmpty()){
             Connection con = null;
             Statement stmt = null;
             try{
