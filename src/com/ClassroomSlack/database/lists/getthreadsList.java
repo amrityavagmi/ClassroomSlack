@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 
 public class getthreadsList {
 
-    public static String[][] getthreadsList(String slackId, String companyName) {
+    public static String[][] getthreadsList(String companyName) {
 
         Connection con = null;
         PreparedStatement stmt = null;
@@ -16,7 +16,7 @@ public class getthreadsList {
 
         String[][] response = new String[1][1];
 
-        String query = DBUtils.prepareSelectQuery(" * ", "classroomslack.threads", "( slackId = '"+slackId+"' AND companyName = '"+companyName+"' )","ORDER BY threadType asc, threadName asc " );
+        String query = DBUtils.prepareSelectQuery(" * ", "classroomslack.threads", "companyName = '"+companyName+"'","ORDER BY threadType asc, threadName asc " );
 
         try {
             con = DBUtils.getConnection();

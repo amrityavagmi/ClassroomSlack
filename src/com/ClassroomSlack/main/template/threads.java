@@ -30,7 +30,7 @@ public class threads {
         channelVB = new VBox(0);
         directMessageVB = new VBox(0);
 
-        String[][] threadsLinked = getthreadsList.getthreadsList(slackId,companyName);
+        String[][] threadsLinked = getthreadsList.getthreadsList(companyName);
         if (threadsLinked[0][0].equals("success")){
             for (int i=1;i<threadsLinked.length;++i)
                 if (threadsLinked[i][0].equals(userName) && threadsLinked[i][1].equals("direct message"))
@@ -41,6 +41,7 @@ public class threads {
 
         ScrollPane channelScroller = new ScrollPane(new BorderPane(channelVB, addThreadTitle(slackId,companyName,"channel"),null,null,null));
         channelScroller.setStyle("-fx-background-color: transparent");
+        channelScroller.setPadding(new Insets(0,0,15,0));
         channelScroller.setFitToWidth(true);
         channelScroller.setVvalue(1.0);
         channelScroller.vvalueProperty().bind(channelVB.heightProperty());
@@ -52,7 +53,7 @@ public class threads {
         directMessageScroller.vvalueProperty().bind(directMessageVB.heightProperty());
 
         BorderPane threads = new BorderPane(directMessageScroller, channelScroller,null,null,null);
-        threads.setMaxWidth(250);
+        threads.setPrefWidth(200);
         threads.setPadding(new Insets(10,0,10,10));
         threads.setStyle("-fx-background-color: #858585");
 
@@ -66,7 +67,7 @@ public class threads {
         Label newThread = new Label("  "+threadName);
         newThread.setAlignment(Pos.BASELINE_LEFT);
         newThread.setPadding(new Insets(5,10,5,10));
-        newThread.setFont(new Font("Arial", 15));
+        newThread.setFont(new Font("Arial", 13));
         newThread.setTextFill(Color.web("#fff"));
 
         StackPane newThreadPane = new StackPane(newThread);
@@ -75,7 +76,7 @@ public class threads {
         newThreadPane.setOnMouseExited(e-> newThreadPane.setStyle("-fx-background-color: transparent"));
         newThreadPane.setCursor(Cursor.HAND);
 
-        newThread.setMaxWidth(250);
+        newThread.setMaxWidth(200);
         newThread.setOnMouseClicked(e->
                 view.setCenter(threadMessages.threadMessages(slackId, threadName, threadType))
         );
@@ -91,12 +92,13 @@ public class threads {
 
         if (threadType.equals("channel")){
             title = GlyphsDude.createIconLabel( FontAwesomeIcon.PLUS_CIRCLE,
-                    "CHANNELS",
+                    "CHANNELS   ",
                     "20",
                     "15",
                     ContentDisplay.RIGHT );
             channelVB.getChildren().add(title);
             newThread ob = new newThread();
+            title.setCursor(Cursor.HAND);
             title.setOnMouseClicked(e-> {
                 String status = ob.newThread(slackId,companyName, threadType);
                 if (!status.equals(""))
@@ -105,13 +107,13 @@ public class threads {
         }
         else{
             title = new Label("DIRECT MESSAGES");
+            title.setFont(new Font("Arial", 15));
             directMessageVB.getChildren().add(title);
         }
         title.setTextFill(Color.web("#fff"));
         title.setAlignment(Pos.BASELINE_LEFT);
         title.setPadding(new Insets(8));
-        title.setMaxWidth(250);
-        title.setCursor(Cursor.HAND);
+        title.setMaxWidth(220);
 
         return title;
     }
