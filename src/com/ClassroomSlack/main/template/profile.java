@@ -32,7 +32,7 @@ public class profile {
         String[][] companiesLinked = getCompaniesList.getCompaniesList(slackId);
         if (companiesLinked[0][0].equals("success")){
             for (int i=1;i<companiesLinked.length;++i){
-                addcompanies(slackId, companiesLinked[i][0],companiesLinked[i][1],companiesLinked[i][2]);
+                addcompanies(companiesLinked[i][0],companiesLinked[i][1],companiesLinked[i][2]);
             }
             companyLists.getChildren().add(new Label(""));
         }
@@ -59,7 +59,7 @@ public class profile {
         companyList.setStyle("-fx-background-color: #606060");
         profilePane.setLeft(companyList);
 
-        companyDetails = threads.chatDetails(slackId, companyName,userName,emailId);
+        companyDetails = threads.chatDetails(companyName,userName,emailId);
         profilePane.setCenter(companyDetails);
 
         scene = new Scene(profilePane,800,500);
@@ -73,7 +73,7 @@ public class profile {
         return scene;
     }
 
-    public static void addcompanies(String slackId,String companyname,String companyUsername,String companyEmployeeEmailId){
+    public static void addcompanies(String companyname, String username, String companyEmployeeEmailId){
         if (!companyname.isEmpty()){
             Label newList = new Label(companyname.toUpperCase().charAt(0)+"");
             newList.setAlignment(Pos.BASELINE_CENTER);
@@ -92,7 +92,7 @@ public class profile {
             );
 
             newList.setOnMouseClicked(e-> {
-                companyDetails = threads.chatDetails(slackId, companyname,companyUsername,companyEmployeeEmailId);
+                companyDetails = threads.chatDetails(companyname,username,companyEmployeeEmailId);
                 profilePane.setCenter(companyDetails);
             });
 

@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 public class newThread {
     public static final Pattern VALID_STRING_REGEX = Pattern.compile("^\\s*$", Pattern.CASE_INSENSITIVE);
 
-    public String newThread(String slackId, String companyName, String threadType){
+    public String newThread(String companyName, String threadType){
         Stage newList = new Stage();
 
         final String[] name = {""};
@@ -64,7 +64,7 @@ public class newThread {
         newList.initModality(Modality.APPLICATION_MODAL);
         newList.showAndWait();
 
-        if (name[0].equals("") || validate(name[0]) || !addNewThread.add(slackId,companyName,name[0], threadType).equals("success"))
+        if (name[0].equals("") || validate(name[0]) || !addNewThread.add(companyName,name[0], threadType).equals("success"))
             name[0]="";
         return name[0];
     }

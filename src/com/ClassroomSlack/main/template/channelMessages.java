@@ -2,9 +2,9 @@ package com.ClassroomSlack.main.template;
 
 import javafx.scene.layout.BorderPane;
 
-public class threadMessages {
+public class channelMessages {
 
-    public static BorderPane threadMessages(String slackId, String threadName,String threadType){
+    public static BorderPane threadMessages( String companyName,String threadName){
 
         BorderPane messages = new BorderPane();
 
